@@ -160,7 +160,7 @@ function renderCards() {
   dishes.forEach(dish => {
     const card = document.createElement('div');
     card.className = 'card' + (dish.id === selectedDish.id ? ' active' : '');
-    card.innerHTML = `<div class="card-media">${mediaHtml(dish)}</div><div class="card-body"><div class="eyebrow2">${dish.category}</div><div class="title2">${dish.name}</div><div class="desc2">${dish.description}</div><div class="meta"><span class="chip">Serve até ${dish.serves} pessoas</span><span><strong>A partir de ${money(dish.laborPerPerson)} por pessoa</strong></span></div></div>`;
+    card.innerHTML = `<div class="card-media">${mediaHtml(dish)}</div><div class="card-body"><div class="eyebrow2">${dish.category}</div><div class="title2">${dish.name}</div><div class="desc2">${dish.description}</div><div class="meta"><span><strong>A partir de ${money(dish.laborPerPerson)} por pessoa</strong></span></div></div>`;
     card.onclick = () => { selectedDish = dish; renderAll(); };
     $('dishGrid').appendChild(card);
   });
