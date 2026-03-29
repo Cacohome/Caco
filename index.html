@@ -39,7 +39,7 @@ h1{margin:18px 0 8px;font-size:58px;line-height:.98;letter-spacing:-.05em}
 .eyebrow2{color:var(--muted);font-size:14px}
 .title2{font-size:24px;font-weight:800;margin:6px 0 10px}
 .desc2{color:var(--muted);line-height:1.5;min-height:68px}
-.meta{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-top:14px;font-size:14px}
+.meta{display:flex;justify-content:flex-start;gap:10px;align-items:center;margin-top:14px;font-size:14px}
 .chip{background:#f6efe8;border-radius:999px;padding:9px 12px;color:#5b4f48;white-space:nowrap}
 .side{display:grid;gap:16px;align-content:start}
 .panel{background:var(--card);border-radius:30px;padding:24px;box-shadow:var(--shadow);border:1px solid var(--line)}
@@ -160,7 +160,7 @@ function renderCards() {
   dishes.forEach(dish => {
     const card = document.createElement('div');
     card.className = 'card' + (dish.id === selectedDish.id ? ' active' : '');
-    card.innerHTML = `<div class="card-media">${mediaHtml(dish)}</div><div class="card-body"><div class="eyebrow2">${dish.category}</div><div class="title2">${dish.name}</div><div class="desc2">${dish.description}</div><div class="meta"><span><strong>A partir de ${money(dish.laborPerPerson)} por pessoa</strong></span></div></div>`;
+    card.innerHTML = `<div class="card-media">${mediaHtml(dish)}</div><div class="card-body"><div class="eyebrow2">${dish.category}</div><div class="title2">${dish.name}</div><div class="desc2">${dish.description}</div><div class="meta"><span><strong>${money(dish.laborPerPerson)} por pessoa</strong></span></div></div>`;
     card.onclick = () => { selectedDish = dish; renderAll(); };
     $('dishGrid').appendChild(card);
   });
