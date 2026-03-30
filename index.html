@@ -1,211 +1,130 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Caco na Sua Home</title>
+
 <style>
-:root{--bg:#f7f2ec;--card:#fff;--text:#1f1712;--muted:#73675f;--brand:#2b1f19;--brand2:#8b5a3c;--soft:#efe6dd;--line:rgba(31,23,18,.08);--shadow:0 20px 50px rgba(31,23,18,.10);--radius:28px}
-*{box-sizing:border-box}
-body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:linear-gradient(180deg,#fbf7f3 0%, var(--bg) 100%)}
-.wrap{max-width:1280px;margin:0 auto;padding:22px}
-.hero{background:var(--card);border-radius:36px;overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-columns:1.05fr 1fr;min-height:440px;border:1px solid var(--line)}
-.hero-copy{padding:42px}
-.pill{display:inline-flex;align-items:center;gap:8px;background:var(--soft);padding:9px 14px;border-radius:999px;font-size:14px;font-weight:700;color:var(--brand)}
-h1{margin:18px 0 8px;font-size:58px;line-height:.98;letter-spacing:-.05em}
-.subtitle{font-size:20px;color:var(--brand2);font-weight:600}
-.hero p{max-width:620px;color:var(--muted);font-size:17px;line-height:1.6}
-.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
-.badge{background:#f5efe8;border-radius:999px;padding:10px 14px;font-size:14px;color:#5b4f48}
-.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:22px}
-.btn-top{display:inline-flex;align-items:center;justify-content:center;padding:14px 18px;border-radius:18px;font-weight:800;text-decoration:none;border:1px solid var(--line)}
-.btn-solid{background:var(--brand);color:#fff}
-.btn-ghost{background:#fff;color:var(--brand)}
-.hero-img{position:relative;min-height:340px;background:#ddd center/cover no-repeat}
-.hero-fallback{position:absolute;inset:0;display:none;align-items:center;justify-content:center;font-size:96px;background:linear-gradient(135deg,#efe1d6,#dcc3ae)}
-.hero-overlay{position:absolute;inset:auto 0 0 0;padding:28px;color:#fff;background:linear-gradient(180deg,rgba(0,0,0,0) 0%, rgba(0,0,0,.80) 100%)}
-.layout{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;margin-top:26px}
-.section-head{display:flex;justify-content:space-between;align-items:end;gap:16px;margin:10px 0 16px}
-.section-head h2{margin:0;font-size:32px}
-.section-head p{margin:6px 0 0;color:var(--muted)}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
-.card{background:var(--card);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);border:2px solid transparent;cursor:pointer;transition:transform .18s ease,border-color .18s ease}
-.card:hover{transform:translateY(-3px)}
-.card.active{border-color:var(--brand)}
-.card-media{width:100%;height:220px;position:relative;background:#eadfd3}
-.card-media img{width:100%;height:100%;object-fit:cover;display:block}
-.card-fallback{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:72px;background:linear-gradient(135deg,#efe1d6,#dcc3ae)}
-.card-body{padding:18px}
-.eyebrow2{color:var(--muted);font-size:14px}
-.title2{font-size:24px;font-weight:800;margin:6px 0 10px}
-.desc2{color:var(--muted);line-height:1.5;min-height:68px}
-.meta{display:flex;justify-content:flex-start;gap:10px;align-items:center;margin-top:14px;font-size:14px}
-.chip{background:#f6efe8;border-radius:999px;padding:9px 12px;color:#5b4f48;white-space:nowrap}
-.side{display:grid;gap:16px;align-content:start}
-.panel{background:var(--card);border-radius:30px;padding:24px;box-shadow:var(--shadow);border:1px solid var(--line)}
-.panel h3{margin:0 0 6px;font-size:28px}
-.muted{color:var(--muted);font-size:14px;margin-bottom:18px}
-.stack>div{margin-bottom:14px}
-label{display:block;font-size:14px;font-weight:700;margin-bottom:8px}
-input,select,textarea{width:100%;border:1px solid #dfd3c7;border-radius:18px;padding:14px 15px;font-size:15px;outline:none;background:#fff}
-textarea{min-height:94px;resize:vertical}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.summary{background:var(--brand);color:#fff}
-.summary .row{display:flex;justify-content:space-between;gap:12px;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.10);font-size:15px}
-.summary .total{font-size:24px;font-weight:900;border-bottom:0;padding-top:18px}
-.btn{width:100%;border:0;border-radius:18px;padding:15px 16px;font-size:16px;font-weight:800;cursor:pointer}
-.btn-primary{background:#fff;color:var(--brand);margin-top:18px}
-.ingredients{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
-.ingredients span{background:#f6efe8;border-radius:999px;padding:8px 12px;color:#5b4f48;font-size:14px}
-.footer-note{color:rgba(255,255,255,.72);font-size:12px;margin-top:10px}
-.helper{background:#fff7f1;border:1px solid #efd9c7;color:#7a4f30;padding:12px 14px;border-radius:16px;font-size:13px;line-height:1.45}
-@media (max-width:940px){.hero,.layout{grid-template-columns:1fr}.grid{grid-template-columns:1fr}h1{font-size:42px}}
+body{
+  font-family: Arial;
+  margin:0;
+  background:#f5f1ec;
+}
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:20px;
+}
+.card{
+  background:#fff;
+  padding:15px;
+  border-radius:15px;
+  margin-bottom:15px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+img{
+  width:100%;
+  border-radius:10px;
+}
+button{
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  background:#2b1f19;
+  color:#fff;
+  font-weight:bold;
+  margin-top:10px;
+}
+input, select{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
 </style>
 </head>
+
 <body>
-<div class="wrap">
-<section class="hero">
-  <div class="hero-copy">
-    <div class="pill">Experiência gastronômica em casa</div>
-    <h1>Caco na Sua Home</h1>
-    <div class="subtitle">Sua casa, meu sabor.</div>
-    <p>Escolha seu prato, informe data e endereço e envie o pedido direto pelo WhatsApp. Atendimento em São José dos Campos, Zona Sul, Centro e Oeste.</p>
-    <div class="badges">
-      <div class="badge">SJC • Zona Sul</div>
-      <div class="badge">Região Central</div>
-      <div class="badge">Região Oeste</div>
-    </div>
-    <div class="hero-actions">
-      <a href="#cardapio" class="btn-top btn-solid">Ver cardápio</a>
-      <a href="#pedido" class="btn-top btn-ghost">Montar pedido</a>
-    </div>
-  </div>
-  <div class="hero-img" id="heroImage">
-    <div class="hero-fallback" id="heroFallback"></div>
-    <div class="hero-overlay">
-      <div style="font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.9;">Prato em destaque</div>
-      <div id="heroTitle" style="font-size:30px;font-weight:800;margin-top:8px;"></div>
-      <div id="heroDesc" style="margin-top:8px;font-size:14px;opacity:.96;line-height:1.45;"></div>
-    </div>
-  </div>
-</section>
 
-<div class="layout">
-  <section id="cardapio">
-    <div class="section-head">
-      <div>
-        <h2>Cardápio</h2>
-        <p>Selecione um prato e veja o resumo do pedido.</p>
-      </div>
-    </div>
-    <div class="grid" id="dishGrid"></div>
-  </section>
+<div class="container">
 
-  <aside class="side">
-    <div class="panel" id="pedido">
-      <h3>Montar pedido</h3>
-      <div class="muted">Preencha os dados e finalize pelo WhatsApp.</div>
-      <div class="stack">
-        <div><label>Prato</label><input id="dishName" disabled /></div>
-        <div class="form-grid">
-          <div><label>Pessoas</label><input id="people" type="number" min="1" value="2" /></div>
-          <div><label>Região</label><select id="region"><option value="sul">Zona Sul</option><option value="centro">Centro</option><option value="oeste">Oeste</option></select></div>
-        </div>
-        <div class="form-grid">
-          <div><label>Data</label><input id="date" type="date" /></div>
-          <div><label>Horário</label><input id="time" type="time" /></div>
-        </div>
-        <div><label>Endereço</label><input id="address" type="text" placeholder="Rua, número, bairro" /></div>
-        <div><label>Observações</label><textarea id="notes" placeholder="Ocasião especial, restrição, preferência de horário..."></textarea></div>
-      </div>
-    </div>
+<h1>Caco na Sua Home</h1>
 
-    <div class="panel summary">
-      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;">
-        <h3 style="margin:0;">Resumo</h3>
-        <div class="pill" style="background:rgba(255,255,255,.12);color:white">Pedido via WhatsApp</div>
-      </div>
-      <div class="row"><span>Ingredientes</span><strong id="sumIngredients">R$ 0</strong></div>
-      <div class="row"><span>Mão de obra</span><strong id="sumLabor">R$ 0</strong></div>
-      <div class="row"><span>Taxa de deslocamento</span><strong id="sumFee">R$ 0</strong></div>
-      <div class="row total"><span>Total</span><strong id="sumTotal">R$ 0</strong></div>
-      <button class="btn btn-primary" id="whatsBtn">Enviar pedido no WhatsApp</button>
-      <div class="footer-note">O pedido é confirmado após pagamento e aprovação da agenda.</div>
-    </div>
-
-    <div class="panel">
-      <h3>Detalhes do prato</h3>
-      <div class="muted" id="dishDescription"></div>
-      <div class="ingredients" id="ingredientList"></div>
-      <div class="helper" style="margin-top:18px;">Se quiser sobremesa ou bebida, informe nas observações do pedido.</div>
-    </div>
-  </aside>
+<div class="card">
+<img src="imagens/prato1.jpg">
+<h2>Costela na Pressão</h2>
+<p>R$ 50,00 por pessoa</p>
+<button onclick="selecionar('Costela na Pressão',50)">Selecionar</button>
 </div>
+
+<div class="card">
+<img src="imagens/prato2.jpg">
+<h2>Bombom de Alcatra</h2>
+<p>R$ 50,00 por pessoa</p>
+<button onclick="selecionar('Bombom de Alcatra',50)">Selecionar</button>
+</div>
+
+<div class="card">
+<h2>Montar Pedido</h2>
+
+<label>Pessoas</label>
+<input id="pessoas" type="number" value="2">
+
+<label>Região</label>
+<select id="regiao">
+<option value="0">Zona Sul</option>
+<option value="20">Centro (+20)</option>
+<option value="30">Oeste (+30)</option>
+</select>
+
+<h3 id="total">Total: R$ 0</h3>
+
+<div style="background:#fff3e6;padding:10px;border-radius:10px">
+💰 Pix: 269.592.038-56
+<br>
+Pedido confirmado após pagamento do sinal
+</div>
+
+<button onclick="enviar()">Enviar no WhatsApp</button>
+
+</div>
+
 </div>
 
 <script>
-const dishes = [{"id": 10, "name": "Costela na Pressão", "category": "Principal / rústico premium", "serves": "3 a 5 pessoas", "description": "Costela bovina cozida na pressão com calabresa, bacon e cebola, extremamente macia e suculenta, desmanchando na boca e cheia de sabor.", "ingredients": ["Costela bovina", "linguiça calabresa", "bacon", "cebola", "alho", "sal", "pimenta", "temperos"], "ingredientsBase": 95, "laborPerPerson": 40, "image": "imagens/01-costela-na-pressao.jpg", "emoji": "🍽️"}, {"id": 9, "name": "Rabanada", "category": "Sobremesa / premium", "serves": "2 a 4 pessoas", "description": "Rabanadas douradas e crocantes por fora, macias por dentro, finalizadas com açúcar e canela, podendo acompanhar ou leite condensado.", "ingredients": ["Pão francês", "leite", "leite condensado", "ovos", "açúcar", "canela", "óleo."], "ingredientsBase": 35, "laborPerPerson": 25, "image": "imagens/02-rabanada.jpg", "emoji": "🍽️"}, {"id": 1, "name": "Hot Roll de Salmão", "category": "Entrada / experiência", "serves": "2 a 3 pessoas", "laborPerPerson": 40, "ingredientsBase": 100, "image": "imagens/03-hot-roll-de-salmao.jpg", "emoji": "🍣", "description": "Hot roll crocante por fora e cremoso por dentro, com salmão, cream cheese, alga, arroz, cebolinha, tarê e shoyo.", "ingredients": ["Salmão", "Cream cheese", "Alga", "Arroz", "Cebolinha", "Tarê", "Shoyo"]}, {"id": 2, "name": "Costelinha com Mandioca", "category": "Principal / família", "serves": "2 a 4 pessoas", "laborPerPerson": 40, "ingredientsBase": 70, "image": "imagens/04-costelinha-com-mandioca.jpg", "emoji": "🍖", "description": "Costelinha suína com arroz temperado, mandioca dourada no caramelo e milho cozido.", "ingredients": ["Costelinha de porco", "Arroz temperado", "Mandioca", "Milho cozido"]}, {"id": 3, "name": "Bacalhoada Especial", "category": "Premium / ocasião especial", "serves": "3 a 6 pessoas", "laborPerPerson": 45, "ingredientsBase": 180, "image": "imagens/05-bacalhoada-especial.jpg", "emoji": "🐟", "description": "Bacalhoada com batata, cebola, ovo cozido, azeitona preta, pimentões coloridos, pão e bacalhau.", "ingredients": ["Bacalhau", "Batata", "Cebola", "Ovo cozido", "Azeitona preta", "Pimentões", "Pão"]}, {"id": 4, "name": "Bombom de Alcatra", "category": "Casal / premium", "serves": "1 a 2 pessoas", "laborPerPerson": 40, "ingredientsBase": 90, "image": "imagens/06-bombom-de-alcatra.jpg", "emoji": "🥩", "description": "Bombom de alcatra com molho gorgonzola, arroz e salada de rúcula.", "ingredients": ["Bombom de alcatra", "Molho gorgonzola", "Arroz", "Rúcula"]}, {"id": 5, "name": "Moqueca de Cação", "category": "Premium / experiência brasileira", "serves": "2 a 4 pessoas", "laborPerPerson": 45, "ingredientsBase": 95, "image": "imagens/07-moqueca-de-cacao.jpg", "emoji": "🥘", "description": "Moqueca de cação com leite de coco, pimentões, cebola, tomate e temperos frescos, acompanhada de arroz branco e pirão.", "ingredients": ["Cação", "Leite de coco", "Pimentão", "Cebola", "Tomate", "Alho", "Coentro", "Azeite de dendê", "Arroz", "Farinha"]}, {"id": 6, "name": "Salada Taco", "category": "Leve / moderna / experiência", "serves": "1 a 2 pessoas", "laborPerPerson": 40, "ingredientsBase": 85, "image": "imagens/08-salada-taco.jpg", "emoji": "🌮", "description": "Salada taco com carne temperada, alface crocante, tomate, queijo, tortilla crocante e molho especial.", "ingredients": ["Carne moída", "Alface", "Tomate", "Queijo", "Tortilla", "Milho", "Feijão", "Molho especial", "Cebola"]}, {"id": 7, "name": "Yakisoba Tradicional", "category": "Principal / popular / alta saída", "serves": "2 a 3 pessoas", "laborPerPerson": 35, "ingredientsBase": 85, "image": "imagens/09-yakisoba-tradicional.jpg", "emoji": "🍜", "description": "Yakisoba com macarrão oriental, carne e frango, legumes frescos e molho especial, preparado na hora.", "ingredients": ["Macarrão", "Carne", "Frango", "Cenoura", "Brócolis", "Repolho", "Cebola", "Shoyu", "Molho especial"]}, {"id": 8, "name": "Risoto de Carne com Parmesão", "category": "Premium / experiência gourmet", "serves": "1 a 2 pessoas", "laborPerPerson": 45, "ingredientsBase": 85, "image": "imagens/10-risoto-de-carne-com-parmesao.jpg", "emoji": "🍽️", "description": "Risoto cremoso com arroz arbóreo, tiras de carne seladas e finalizado com parmesão.", "ingredients": ["Arroz arbóreo", "Carne em tiras", "Parmesão", "Manteiga", "Alho", "Cebola", "Caldo de carne", "Vinho branco", "Azeite"]}];
-let regionFees = {"sul": 0, "centro": 15, "oeste": 25};
-let selectedDish = dishes[0];
-const $ = id => document.getElementById(id);
-const money = v => new Intl.NumberFormat('pt-BR', {style:'currency', currency:'BRL'}).format(v);
+let prato = "";
+let preco = 0;
 
-function mediaHtml(dish) {
-  if (dish.image) return `<img src="${dish.image}" alt="${dish.name}">`;
-  return `<div class="card-fallback">${dish.emoji || '🍽️'}</div>`;
+function selecionar(nome,valor){
+  prato = nome;
+  preco = valor;
+  calcular();
 }
 
-function renderCards() {
-  $('dishGrid').innerHTML = '';
-  dishes.forEach(dish => {
-    const card = document.createElement('div');
-    card.className = 'card' + (dish.id === selectedDish.id ? ' active' : '');
-    card.innerHTML = `<div class="card-media">${mediaHtml(dish)}</div><div class="card-body"><div class="eyebrow2">${dish.category}</div><div class="title2">${dish.name}</div><div class="desc2">${dish.description}</div><div class="meta"><span><strong>${money(dish.laborPerPerson)} por pessoa</strong></span></div></div>`;
-    card.onclick = () => { selectedDish = dish; renderAll(); };
-    $('dishGrid').appendChild(card);
-  });
+document.getElementById("pessoas").oninput = calcular;
+document.getElementById("regiao").onchange = calcular;
+
+function calcular(){
+  let pessoas = document.getElementById("pessoas").value;
+  let taxa = Number(document.getElementById("regiao").value);
+
+  let total = (preco * pessoas) + taxa;
+
+  document.getElementById("total").innerText = "Total: R$ " + total;
 }
 
-function renderDetails() {
-  $('heroTitle').textContent = selectedDish.name;
-  $('heroDesc').textContent = selectedDish.description;
-  $('dishName').value = selectedDish.name;
-  $('dishDescription').textContent = selectedDish.description;
-  $('ingredientList').innerHTML = selectedDish.ingredients.map(i => `<span>${i}</span>`).join('');
+function enviar(){
+  let pessoas = document.getElementById("pessoas").value;
+  let total = document.getElementById("total").innerText;
 
-  if (selectedDish.image) {
-    $('heroImage').style.backgroundImage = `url('${selectedDish.image}')`;
-    $('heroFallback').style.display = 'none';
-  } else {
-    $('heroImage').style.backgroundImage = 'none';
-    $('heroFallback').style.display = 'flex';
-    $('heroFallback').textContent = selectedDish.emoji || '🍽️';
-  }
+  let msg = `Pedido:\nPrato: ${prato}\nPessoas: ${pessoas}\n${total}\nPix: 269.592.038-56`;
+
+  window.location.href = "https://wa.me/5512992107776?text=" + encodeURIComponent(msg);
 }
-
-function renderSummary() {
-  const people = Math.max(1, Number($('people').value || 1));
-  const fee = Number(regionFees[$('region').value] || 0);
-  const ingredients = Number(selectedDish.ingredientsBase || 0);
-  const labor = Number(selectedDish.laborPerPerson || 0) * people;
-  const total = ingredients + labor + fee;
-  $('sumIngredients').textContent = money(ingredients);
-  $('sumLabor').textContent = money(labor);
-  $('sumFee').textContent = money(fee);
-  $('sumTotal').textContent = money(total);
-
-  const msg = `Olá, Caco! Quero pedir no Caco na Sua Home.%0A%0APrato: ${selectedDish.name}%0APessoas: ${people}%0ARegião: ${$('region').options[$('region').selectedIndex].text}%0AData: ${$('date').value || 'a combinar'}%0AHorário: ${$('time').value || 'a combinar'}%0AEndereço: ${$('address').value || 'não informado'}%0AObservações: ${$('notes').value || 'sem observações'}%0A%0AIngredientes: ${money(ingredients)}%0AMão de obra: ${money(labor)}%0ATaxa: ${money(fee)}%0ATotal: ${money(total)}`;
-  $('whatsBtn').onclick = () => window.location.href = `https://wa.me/5512992107776?text=${msg}`;
-}
-
-function renderAll() {
-  renderCards();
-  renderDetails();
-  renderSummary();
-}
-
-['people','region','date','time','address','notes'].forEach(id => $(id).addEventListener(id==='region'?'change':'input', renderSummary));
-renderAll();
 </script>
+
 </body>
 </html>
