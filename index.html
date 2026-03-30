@@ -145,7 +145,7 @@
   <div class="wrap">
     <div class="top">
       <h1 style="margin:0 0 8px;">Caco na Sua Home</h1>
-      <div>Sua casa, meu sabor.</div>
+      <div>Sua casa, meu sabor. Valores finais ajustados conforme a quantidade de pessoas.</div>
     </div>
 
     <div class="grid">
@@ -162,7 +162,7 @@
         <div class="row">
           <div>
             <label>Pessoas</label>
-            <input id="people" type="number" min="1" value="2">
+            <input id="people" type="number" min="1" value="1">
           </div>
           <div>
             <label>Região</label>
@@ -200,8 +200,8 @@
 
         <div class="pix">
           <div><strong>Chave Pix:</strong> 269.592.038-56</div>
-          <div style="margin-top:6px;">Pedido confirmado após pagamento do sinal.</div>
-          <div style="margin-top:6px;">O sinal corresponde ao valor dos ingredientes. O restante é pago no dia.</div>
+          <div style="margin-top:6px;">O valor final é calculado conforme a quantidade de pessoas.</div>
+          <div style="margin-top:6px;">Para reservar a data, o sinal via Pix corresponde ao valor dos ingredientes. O restante é pago no dia do serviço.</div>
         </div>
 
         <button id="whatsBtn">Enviar pedido no WhatsApp</button>
@@ -224,7 +224,7 @@
         id: 9,
         name: "Rabanada",
         category: "Sobremesa / premium",
-        description: "Rabanadas douradas e crocantes por fora, macias por dentro, finalizadas com açúcar e canela, podendo acompanhar ou leite condensado.",
+        description: "Rabanadas douradas e crocantes por fora, macias por dentro, finalizadas com açúcar e canela.",
         ingredientsBase: 35,
         laborPerPerson: 25,
         image: "imagens/02-rabanada.jpg"
@@ -242,7 +242,7 @@
         id: 2,
         name: "Costelinha com Mandioca",
         category: "Principal / família",
-        description: "Costelinha suína com arroz temperado, mandioca dourada no caramelo e milho cozido.",
+        description: "Costelinha suína com arroz temperado, mandioca dourada e milho cozido.",
         ingredientsBase: 70,
         laborPerPerson: 40,
         image: "imagens/04-costelinha-com-mandioca.jpg"
@@ -328,7 +328,7 @@
           <div class="cat">${dish.category || ''}</div>
           <h3>${dish.name || ''}</h3>
           <div class="desc">${dish.description || ''}</div>
-          <div class="price">R$ ${Number(dish.laborPerPerson || 0).toFixed(2).replace('.', ',')} por pessoa</div>
+          <div class="price">A partir de R$ ${Number(dish.laborPerPerson || 0).toFixed(2).replace('.', ',')} por pessoa</div>
         `;
         card.onclick = () => {
           selectedDish = dish;
