@@ -1,130 +1,393 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Caco na Sua Home</title>
-
-<style>
-body{
-  font-family: Arial;
-  margin:0;
-  background:#f5f1ec;
-}
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:20px;
-}
-.card{
-  background:#fff;
-  padding:15px;
-  border-radius:15px;
-  margin-bottom:15px;
-  box-shadow:0 5px 15px rgba(0,0,0,0.1);
-}
-img{
-  width:100%;
-  border-radius:10px;
-}
-button{
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:10px;
-  background:#2b1f19;
-  color:#fff;
-  font-weight:bold;
-  margin-top:10px;
-}
-input, select{
-  width:100%;
-  padding:10px;
-  margin-top:5px;
-  border-radius:8px;
-  border:1px solid #ccc;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caco na Sua Home</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      margin:0;
+      background:#f7f2ec;
+      color:#222;
+    }
+    .wrap{
+      max-width:1100px;
+      margin:0 auto;
+      padding:20px;
+    }
+    .top{
+      background:#fff;
+      border-radius:18px;
+      padding:20px;
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+      margin-bottom:18px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:1.2fr .8fr;
+      gap:18px;
+    }
+    .cards{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+    .card{
+      background:#fff;
+      border-radius:18px;
+      padding:14px;
+      box-shadow:0 8px 20px rgba(0,0,0,.08);
+      cursor:pointer;
+      border:2px solid transparent;
+    }
+    .card.active{
+      border-color:#2b1f19;
+    }
+    .card img{
+      width:100%;
+      height:190px;
+      object-fit:cover;
+      border-radius:12px;
+      background:#eadfd3;
+    }
+    .cat{
+      font-size:13px;
+      color:#666;
+      margin-top:10px;
+    }
+    .card h3{
+      margin:6px 0;
+      font-size:22px;
+    }
+    .desc{
+      font-size:14px;
+      color:#666;
+      min-height:54px;
+      line-height:1.4;
+    }
+    .price{
+      font-weight:700;
+      margin-top:10px;
+    }
+    .panel{
+      background:#fff;
+      border-radius:18px;
+      padding:18px;
+      box-shadow:0 8px 24px rgba(0,0,0,.08);
+      position:sticky;
+      top:20px;
+      height:fit-content;
+    }
+    label{
+      display:block;
+      font-size:13px;
+      font-weight:700;
+      margin:10px 0 6px;
+    }
+    input, select, textarea{
+      width:100%;
+      padding:12px;
+      border-radius:12px;
+      border:1px solid #ddd;
+      box-sizing:border-box;
+      font-size:15px;
+    }
+    textarea{
+      min-height:90px;
+      resize:vertical;
+    }
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+    .sumrow{
+      display:flex;
+      justify-content:space-between;
+      padding:10px 0;
+      border-bottom:1px solid #eee;
+      gap:10px;
+    }
+    .total{
+      font-size:22px;
+      font-weight:700;
+    }
+    .pix{
+      background:#fff8f1;
+      border:1px solid #edd6c2;
+      padding:12px;
+      border-radius:12px;
+      margin-top:12px;
+      font-size:14px;
+      line-height:1.5;
+    }
+    button{
+      width:100%;
+      padding:14px;
+      border:0;
+      border-radius:14px;
+      background:#2b1f19;
+      color:#fff;
+      font-weight:700;
+      margin-top:14px;
+      cursor:pointer;
+      font-size:15px;
+    }
+    @media (max-width:900px){
+      .grid{grid-template-columns:1fr}
+      .cards{grid-template-columns:1fr}
+      .panel{position:static}
+    }
+  </style>
 </head>
-
 <body>
+  <div class="wrap">
+    <div class="top">
+      <h1 style="margin:0 0 8px;">Caco na Sua Home</h1>
+      <div>Sua casa, meu sabor.</div>
+    </div>
 
-<div class="container">
+    <div class="grid">
+      <div>
+        <div class="cards" id="cards"></div>
+      </div>
 
-<h1>Caco na Sua Home</h1>
+      <div class="panel">
+        <h2 style="margin-top:0;">Montar pedido</h2>
 
-<div class="card">
-<img src="imagens/prato1.jpg">
-<h2>Costela na Pressão</h2>
-<p>R$ 50,00 por pessoa</p>
-<button onclick="selecionar('Costela na Pressão',50)">Selecionar</button>
-</div>
+        <label>Prato</label>
+        <input id="dishName" disabled>
 
-<div class="card">
-<img src="imagens/prato2.jpg">
-<h2>Bombom de Alcatra</h2>
-<p>R$ 50,00 por pessoa</p>
-<button onclick="selecionar('Bombom de Alcatra',50)">Selecionar</button>
-</div>
+        <div class="row">
+          <div>
+            <label>Pessoas</label>
+            <input id="people" type="number" min="1" value="2">
+          </div>
+          <div>
+            <label>Região</label>
+            <select id="region">
+              <option value="sul">Zona Sul</option>
+              <option value="centro">Centro</option>
+              <option value="oeste">Oeste</option>
+            </select>
+          </div>
+        </div>
 
-<div class="card">
-<h2>Montar Pedido</h2>
+        <div class="row">
+          <div>
+            <label>Data</label>
+            <input id="date" type="date">
+          </div>
+          <div>
+            <label>Horário</label>
+            <input id="time" type="time">
+          </div>
+        </div>
 
-<label>Pessoas</label>
-<input id="pessoas" type="number" value="2">
+        <label>Endereço</label>
+        <input id="address" placeholder="Rua, número, bairro">
 
-<label>Região</label>
-<select id="regiao">
-<option value="0">Zona Sul</option>
-<option value="20">Centro (+20)</option>
-<option value="30">Oeste (+30)</option>
-</select>
+        <label>Observações</label>
+        <textarea id="notes" placeholder="Ocasião especial, restrição, preferência de horário..."></textarea>
 
-<h3 id="total">Total: R$ 0</h3>
+        <div class="sumrow"><span>Ingredientes</span><strong id="sumIngredients">R$ 0,00</strong></div>
+        <div class="sumrow"><span>Mão de obra</span><strong id="sumLabor">R$ 0,00</strong></div>
+        <div class="sumrow"><span>Taxa</span><strong id="sumFee">R$ 0,00</strong></div>
+        <div class="sumrow"><span>Sinal (Pix)</span><strong id="sumSignal">R$ 0,00</strong></div>
+        <div class="sumrow"><span>Restante no dia</span><strong id="sumRemainder">R$ 0,00</strong></div>
+        <div class="sumrow total"><span>Total</span><strong id="sumTotal">R$ 0,00</strong></div>
 
-<div style="background:#fff3e6;padding:10px;border-radius:10px">
-💰 Pix: 269.592.038-56
-<br>
-Pedido confirmado após pagamento do sinal
-</div>
+        <div class="pix">
+          <div><strong>Chave Pix:</strong> 269.592.038-56</div>
+          <div style="margin-top:6px;">Pedido confirmado após pagamento do sinal.</div>
+          <div style="margin-top:6px;">O sinal corresponde ao valor dos ingredientes. O restante é pago no dia.</div>
+        </div>
 
-<button onclick="enviar()">Enviar no WhatsApp</button>
+        <button id="whatsBtn">Enviar pedido no WhatsApp</button>
+      </div>
+    </div>
+  </div>
 
-</div>
+  <script>
+    const dishes = [
+      {
+        id: 10,
+        name: "Costela na Pressão",
+        category: "Principal / rústico premium",
+        description: "Costela bovina cozida na pressão com calabresa, bacon e cebola, extremamente macia e suculenta, desmanchando na boca e cheia de sabor.",
+        ingredientsBase: 95,
+        laborPerPerson: 40,
+        image: "imagens/01-costela-na-pressao.jpg"
+      },
+      {
+        id: 9,
+        name: "Rabanada",
+        category: "Sobremesa / premium",
+        description: "Rabanadas douradas e crocantes por fora, macias por dentro, finalizadas com açúcar e canela, podendo acompanhar ou leite condensado.",
+        ingredientsBase: 35,
+        laborPerPerson: 25,
+        image: "imagens/02-rabanada.jpg"
+      },
+      {
+        id: 1,
+        name: "Hot Roll de Salmão",
+        category: "Entrada / experiência",
+        description: "Hot roll crocante por fora e cremoso por dentro, com salmão, cream cheese, alga, arroz, cebolinha, tarê e shoyo.",
+        ingredientsBase: 100,
+        laborPerPerson: 40,
+        image: "imagens/03-hot-roll-de-salmao.jpg"
+      },
+      {
+        id: 2,
+        name: "Costelinha com Mandioca",
+        category: "Principal / família",
+        description: "Costelinha suína com arroz temperado, mandioca dourada no caramelo e milho cozido.",
+        ingredientsBase: 70,
+        laborPerPerson: 40,
+        image: "imagens/04-costelinha-com-mandioca.jpg"
+      },
+      {
+        id: 3,
+        name: "Bacalhoada Especial",
+        category: "Premium / ocasião especial",
+        description: "Bacalhoada com batata, cebola, ovo cozido, azeitona preta, pimentões coloridos, pão e bacalhau.",
+        ingredientsBase: 180,
+        laborPerPerson: 45,
+        image: "imagens/05-bacalhoada-especial.jpg"
+      },
+      {
+        id: 4,
+        name: "Bombom de Alcatra",
+        category: "Casal / premium",
+        description: "Bombom de alcatra com molho gorgonzola, arroz e salada de rúcula.",
+        ingredientsBase: 90,
+        laborPerPerson: 40,
+        image: "imagens/06-bombom-de-alcatra.jpg"
+      },
+      {
+        id: 5,
+        name: "Moqueca de Cação",
+        category: "Premium / experiência brasileira",
+        description: "Moqueca de cação com leite de coco, pimentões, cebola, tomate e temperos frescos, acompanhada de arroz branco e pirão.",
+        ingredientsBase: 95,
+        laborPerPerson: 45,
+        image: "imagens/07-moqueca-de-cacao.jpg"
+      },
+      {
+        id: 6,
+        name: "Salada Taco",
+        category: "Leve / moderna / experiência",
+        description: "Salada taco com carne temperada, alface crocante, tomate, queijo, tortilla crocante e molho especial.",
+        ingredientsBase: 85,
+        laborPerPerson: 40,
+        image: "imagens/08-salada-taco.jpg"
+      },
+      {
+        id: 7,
+        name: "Yakisoba Tradicional",
+        category: "Principal / popular / alta saída",
+        description: "Yakisoba com macarrão oriental, carne e frango, legumes frescos e molho especial, preparado na hora.",
+        ingredientsBase: 85,
+        laborPerPerson: 35,
+        image: "imagens/09-yakisoba-tradicional.jpg"
+      },
+      {
+        id: 8,
+        name: "Risoto de Carne com Parmesão",
+        category: "Premium / experiência gourmet",
+        description: "Risoto cremoso com arroz arbóreo, tiras de carne seladas e finalizado com parmesão.",
+        ingredientsBase: 85,
+        laborPerPerson: 45,
+        image: "imagens/10-risoto-de-carne-com-parmesao.jpg"
+      }
+    ];
 
-</div>
+    const regionFees = {
+      sul: 0,
+      centro: 0,
+      oeste: 0
+    };
 
-<script>
-let prato = "";
-let preco = 0;
+    let selectedDish = dishes[0];
 
-function selecionar(nome,valor){
-  prato = nome;
-  preco = valor;
-  calcular();
-}
+    const $ = id => document.getElementById(id);
+    const money = v => new Intl.NumberFormat('pt-BR', {
+      style: 'currency',
+      currency: 'BRL'
+    }).format(v);
 
-document.getElementById("pessoas").oninput = calcular;
-document.getElementById("regiao").onchange = calcular;
+    function renderCards() {
+      $('cards').innerHTML = '';
 
-function calcular(){
-  let pessoas = document.getElementById("pessoas").value;
-  let taxa = Number(document.getElementById("regiao").value);
+      dishes.forEach(dish => {
+        const card = document.createElement('div');
+        card.className = 'card' + (dish.id === selectedDish.id ? ' active' : '');
+        card.innerHTML = `
+          <img src="${dish.image}" alt="${dish.name}">
+          <div class="cat">${dish.category || ''}</div>
+          <h3>${dish.name || ''}</h3>
+          <div class="desc">${dish.description || ''}</div>
+          <div class="price">R$ ${Number(dish.laborPerPerson || 0).toFixed(2).replace('.', ',')} por pessoa</div>
+        `;
+        card.onclick = () => {
+          selectedDish = dish;
+          renderAll();
+        };
+        $('cards').appendChild(card);
+      });
+    }
 
-  let total = (preco * pessoas) + taxa;
+    function renderSummary() {
+      const people = Math.max(1, Number($('people').value || 1));
+      const fee = Number(regionFees[$('region').value] || 0);
+      const ingredients = Number(selectedDish.ingredientsBase || 0) * people;
+      const labor = Number(selectedDish.laborPerPerson || 0) * people;
+      const signal = ingredients;
+      const remainder = labor + fee;
+      const total = ingredients + labor + fee;
 
-  document.getElementById("total").innerText = "Total: R$ " + total;
-}
+      $('dishName').value = selectedDish.name || '';
+      $('sumIngredients').textContent = money(ingredients);
+      $('sumLabor').textContent = money(labor);
+      $('sumFee').textContent = money(fee);
+      $('sumSignal').textContent = money(signal);
+      $('sumRemainder').textContent = money(remainder);
+      $('sumTotal').textContent = money(total);
 
-function enviar(){
-  let pessoas = document.getElementById("pessoas").value;
-  let total = document.getElementById("total").innerText;
+      const msg = `Olá! Quero fazer um pedido no Caco na Sua Home.
 
-  let msg = `Pedido:\nPrato: ${prato}\nPessoas: ${pessoas}\n${total}\nPix: 269.592.038-56`;
+Prato: ${selectedDish.name}
+Pessoas: ${people}
+Região: ${$('region').options[$('region').selectedIndex].text}
+Data: ${$('date').value || 'a combinar'}
+Horário: ${$('time').value || 'a combinar'}
+Endereço: ${$('address').value || 'não informado'}
+Observações: ${$('notes').value || 'sem observações'}
 
-  window.location.href = "https://wa.me/5512992107776?text=" + encodeURIComponent(msg);
-}
-</script>
+Ingredientes: ${money(ingredients)}
+Mão de obra: ${money(labor)}
+Taxa: ${money(fee)}
+Sinal (Pix): ${money(signal)}
+Restante no dia: ${money(remainder)}
+Total: ${money(total)}
+Chave Pix: 269.592.038-56`;
 
+      $('whatsBtn').onclick = () => {
+        window.location.href = "https://wa.me/5512992107776?text=" + encodeURIComponent(msg);
+      };
+    }
+
+    function renderAll() {
+      renderCards();
+      renderSummary();
+    }
+
+    ['people','region','date','time','address','notes'].forEach(id => {
+      $(id).addEventListener(id === 'region' ? 'change' : 'input', renderSummary);
+    });
+
+    renderAll();
+  </script>
 </body>
 </html>
